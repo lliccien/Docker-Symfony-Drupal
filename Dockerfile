@@ -95,7 +95,8 @@ RUN rm -rf /var/www/html && mkdir -p /var/lock/apache2 /var/run/apache2 /var/log
 
 WORKDIR /var/www/html
 
+RUN usermod -u 1000 www-data
 
-EXPOSE 22 80
+EXPOSE 80
 CMD ["/usr/bin/supervisord"]
 
