@@ -15,7 +15,7 @@ Crear contenedor de Mysql oficial:
 
 Crear contenedor como demonio definiendo: puertos, volumen y enlace con mysql basado en la imagen lliccien/symfony-drupal (la carpeta ~/www debe existir antes de crear el contenedor):
 
-    docker run -p 80:80 -v ~/www:/var/www/html --name=testing --link some-mysql-mysql:mysql -d lliccien/symfony-drupal
+    docker run -p 80:80 -v ~/www:/var/www/html --name testing --link some-mysql-mysql:mysql -d lliccien/symfony-drupal
 
 Inspeccionar la configuración del contenedor para saber los datos como la ip, lo puertos, memoria, entre otros del contenedor:
 
