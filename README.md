@@ -9,9 +9,9 @@ Construir la imagen basada en el Dockerfile:
 
     docker build -t lliccien/docker-symfony-drupal .
 
-Crear contenedor de Mysql oficial:
+Crear contenedor de Mysql oficial con la codificacion de caracteres en utf8:
 
-    docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql
+    docker run --name some-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql --character-set-server=utf8 --collation-server=utf8_general_ci
 
 Crear contenedor como demonio definiendo: puertos, volumen y enlace con mysql basado en la imagen lliccien/docker-symfony-drupal (la carpeta ~/www debe existir antes de crear el contenedor):
 
