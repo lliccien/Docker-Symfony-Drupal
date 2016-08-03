@@ -24,6 +24,7 @@ RUN apt-get update && apt-get upgrade --yes && \
         php5-mcrypt     \
         php5-memcache   \
         php5-mysql      \
+        php5-mongo      \
         php5-redis      \
         php5-sqlite     \
         php5-tidy       \
