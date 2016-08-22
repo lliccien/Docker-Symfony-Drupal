@@ -83,6 +83,9 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN rm -rf /var/www/html && mkdir -p /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html /var/log/supervisor && chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html /var/log/supervisor
 
+# install libxrender1 for wkhtmltopdf
+RUN apt-get update && apt-get install libxrender1 --yes
+
 # Override Enabled ENV Variables
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
