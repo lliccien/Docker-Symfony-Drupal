@@ -6,7 +6,7 @@ ENV TERM xterm
 
 # Update the package repository  and Install base packages
 RUN apt-get update && apt-get upgrade --yes && \
-    apt-get install --yes nano wget curl sqlite3 && \
+    apt-get install --yes nano wget curl sqlite3 git && \
     apt-get install --yes apache2 supervisor && \
     apt-get install --yes \
         php-pear        \
