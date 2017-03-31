@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM ubuntu:16.04
 MAINTAINER Ludwring Liccien <ludwring.liccien@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive 
