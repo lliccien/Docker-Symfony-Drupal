@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM ubuntu:15.10
 MAINTAINER Ludwring Liccien <ludwring.liccien@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive 
@@ -30,8 +30,9 @@ RUN apt-get update && apt-get upgrade --yes && \
         php5-tidy       \
         php5-xdebug     \
         php5-xhprof     \
-        libapache2-mod-php5   && \
-        pecl install uploadprogress
+        libapache2-mod-php5    \
+        && pecl install uploadprogress \
+        && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 # Install Composer
@@ -45,6 +46,9 @@ RUN curl https://drupalconsole.com/installer -L -o drupal.phar && mv drupal.phar
 
 # Install Symfony Installer
 RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && chmod a+x /usr/local/bin/symfony 
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_6.x && apt-get install -y nodejs
 
 # Cleaning
 RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
