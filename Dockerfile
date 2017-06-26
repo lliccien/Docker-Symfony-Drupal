@@ -48,7 +48,9 @@ RUN curl https://drupalconsole.com/installer -L -o drupal.phar && mv drupal.phar
 RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && chmod a+x /usr/local/bin/symfony 
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && apt-get install -y nodejs
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+	apt-get update && \
+	apt-get install -y nodejs
 
 # Cleaning
 RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
