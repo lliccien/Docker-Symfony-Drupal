@@ -30,8 +30,9 @@ RUN apt-get update && apt-get upgrade --yes && \
         php5-tidy       \
         php5-xdebug     \
         php5-xhprof     \
-        libapache2-mod-php5   && \
-        pecl install uploadprogress
+        libapache2-mod-php5    && \
+        pecl install uploadprogress  && \
+        rm -rf /var/lib/apt/lists/*
 
 
 # Install Composer
@@ -44,7 +45,12 @@ RUN wget http://files.drush.org/drush.phar && chmod +x drush.phar && mv drush.ph
 RUN curl https://drupalconsole.com/installer -L -o drupal.phar && mv drupal.phar /usr/local/bin/drupal && chmod +x /usr/local/bin/drupal
 
 # Install Symfony Installer
-RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && chmod a+x /usr/local/bin/symfony 
+RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && chmod a+x /usr/local/bin/symfony
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+	apt-get update && \
+	apt-get install -y nodejs
 
 # Cleaning
 RUN apt-get -y autoremove && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -54,11 +60,11 @@ RUN sed -i '$ a\xdebug.var_display_max_depth=4' /etc/php5/mods-available/xdebug.
     sed -i '$ a\xdebug.max_nesting_level=500' /etc/php5/mods-available/xdebug.ini && \
     sed -i '$ a\xdebug.var_display_max_data=-1' /etc/php5/mods-available/xdebug.ini && \
     sed -i '$ a\xdebug.remote_enable=1' /etc/php5/mods-available/xdebug.ini && \
-    sed -i '$ a\xdebug.remote_port="9000"' /etc/php5/mods-available/xdebug.ini 
+    sed -i '$ a\xdebug.remote_port="9000"' /etc/php5/mods-available/xdebug.ini
 
 # Confugure php.ini apache
 RUN sed -ri 's/^max_execution_time\s*=\s*30/max_execution_time = 3600/g' /etc/php5/apache2/php.ini && \
-    sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/apache2/php.ini && \ 
+    sed -ri 's/^display_errors\s*=\s*Off/display_errors = On/g' /etc/php5/apache2/php.ini && \
     sed -ri 's/^;date.timezone\s*=/date.timezone = UTC/g' /etc/php5/apache2/php.ini && \
     sed -ri 's/^memory_limit\s*=\s*128M/memory_limit = 1024M/g' /etc/php5/apache2/php.ini && \
     sed -ri 's/^post_max_size\s*=\s*8M/post_max_size = 2048M/g' /etc/php5/apache2/php.ini && \
@@ -69,7 +75,7 @@ RUN sed -ri 's/^max_execution_time\s*=\s*30/max_execution_time = 3600/g' /etc/ph
     sed -ri 's/^;opcache.interned_strings_buffer=4/opcache.interned_strings_buffer=8/g' /etc/php5/apache2/php.ini && \
     sed -ri 's/^;opcache.max_accelerated_files=2000/opcache.max_accelerated_files=4000/g' /etc/php5/apache2/php.ini && \
     sed -ri 's/^;opcache.revalidate_freq=2/opcache.revalidate_freq=60/g' /etc/php5/apache2/php.ini && \
-    sed -ri 's/^;opcache.fast_shutdown=0/opcache.fast_shutdown=1/g' /etc/php5/apache2/php.ini && \  
+    sed -ri 's/^;opcache.fast_shutdown=0/opcache.fast_shutdown=1/g' /etc/php5/apache2/php.ini && \
     echo 'extension=uploadprogress.so' >> /etc/php5/apache2/php.ini
 
 # Confugure php.ini php Cli
