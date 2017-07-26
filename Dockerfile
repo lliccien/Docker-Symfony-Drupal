@@ -7,7 +7,8 @@ ENV TERM xterm
 # Add repository PPA php 7.1
 RUN apt-get update  && \
     apt-get install -y python-software-properties && \
-    apt-get install -y software-properties-common
+    apt-get install -y software-properties-common && \
+    apt-get install -y build-essential
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get update && \
