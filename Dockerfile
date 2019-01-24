@@ -51,7 +51,7 @@ RUN apt-get update && apt-get upgrade --yes && \
         php7.2-xmlrpc \
         php7.2-xsl \
         php7.2-zip && \
-    apt-get install -y php-gnupg php-imagick php-mongodb php-fxsl php-uploadprogress php-memcached 
+    apt-get install -y php-gnupg php-imagick php-mongodb php-fxsl php-uploadprogress php-memcached mysql-client
 
 #        php7.2-mcrypt \
 # Install Composer
